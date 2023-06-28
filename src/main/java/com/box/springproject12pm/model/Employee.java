@@ -44,7 +44,7 @@ public class Employee {
 	private Address address;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="deparimentId")
+	@JoinColumn(name="departmentId")
 	private Department department;
 	
 	@ElementCollection

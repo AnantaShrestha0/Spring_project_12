@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.box.springproject12pm.model.Department;
 import com.box.springproject12pm.service.Department_Service;
@@ -27,6 +28,37 @@ public class DepartmentController {
 	public String postadddept(@ModelAttribute Department department,Model model) {
 		department_Service.addDepth(department);
 		return "departmetform";
+	}
+	
+	
+	@GetMapping("/list")
+	public String getAll(Model model) {
+		
+		model.addAttribute("deptlist", department_Service.getAllDepth());
+		return "DepartmentListForm";
+	}
+	
+	@GetMapping("/edit")
+	public String postedit(@RequestParam int id,Model model) {
+		model.addAttribute("deptObject",department_Service.getDepthById(id));
+		return "DepartmentEditForm";
+	}
+	
+	@GetMapping("/view")
+	public String getview(@RequestParam int id,Model model) {
+		model.addAttribute("deptObject",department_Service.getDepthById(id));
+		return "DepartmentviewForm";
+	}
+	@PostMapping("/update")
+	public String update(@ModelAttribute Department department) {
+		department_Service.addDepth(department);
+		return "redirect:/department/list";
+	}
+	
+	@GetMapping("/delete")
+	public String delete(@RequestParam int id) {
+		department_Service.deleteDepth(id);
+		return "redirect:/department/list";
 	}
 	
 }

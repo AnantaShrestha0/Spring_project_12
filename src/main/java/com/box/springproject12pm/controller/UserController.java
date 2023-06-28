@@ -63,4 +63,9 @@ public class UserController {
 		model.addAttribute("same_username_found", "Password not match.");
 		return "signup";
 	}
+	
+	@GetMapping("/logout")
+	private String logOut() {
+		return "login";
+	}
 }
