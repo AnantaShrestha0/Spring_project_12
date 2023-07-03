@@ -1,5 +1,7 @@
 package com.box.springproject12pm.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,13 +17,19 @@ public class ContactController {
 	private MailUtil mailUtil;
 	
 	@GetMapping("/contact")
-	public String getContact() {
+	public String getContact(HttpSession session) {
+		if(session.getAttribute("validuser")==null) {
+			return "login";
+		}
 		return "ContactForm";
 	}
 	
 	@PostMapping("/contact")
-	public String postContact(@RequestParam String toEmail,@RequestParam String subject,@RequestParam String message) {
+	public String postContact(@RequestParam String toEmail,@RequestParam String subject,@RequestParam String message,HttpSession session) {
 		
+		if(session.getAttribute("validuser")==null) {
+			return "login";
+		}
 		mailUtil.sendEmail(toEmail,subject,message);
 		return "ContactForm";
 	}

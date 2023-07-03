@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+ <link rel="stylesheet" th:href="@{/css/forgotemailstyle.css}" />
+</head>
+<body>
+ <P style="color: red;">[[${username_error}]]</P>
+     <div class="wrapper">
+       
+         <input type="checkbox" id="click">
+         <label class="btn-1" for="click">Forgot Password?</label>
+         <div class="field">
+            <form action="/forgot" method="post">
+            <input type="email" name="email" placeholder="Email Address">
+            <label for="click" class="btn-2"><input type="submit" value="Send"></label>
+            </form>
+         </div>
+      </div>
+</body>
+</html>

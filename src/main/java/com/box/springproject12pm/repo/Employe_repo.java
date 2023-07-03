@@ -6,4 +6,5 @@ import com.box.springproject12pm.model.Employee;
 
 public interface Employe_repo  extends JpaRepository<Employee, Long>{
 
+	
 }

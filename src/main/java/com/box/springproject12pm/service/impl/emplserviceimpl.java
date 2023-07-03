@@ -46,8 +46,9 @@ public class emplserviceimpl implements Emplservice{
 	@Override
 	public List<Employee> getAllEmps() {
 		// TODO Auto-generated method stub
-		employe_repo.findAll();
-		return null;
+	
+		return employe_repo.findAll();
+		//return null;
 	}
 
 	

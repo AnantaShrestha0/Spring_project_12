@@ -2,6 +2,8 @@ package com.box.springproject12pm.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +30,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public String postlogin(@ModelAttribute User user,Model model) {
+	public String postlogin(@ModelAttribute User user,Model model,HttpSession session) {
 		
 		User username=userserv.login_username(user.getUsername());
 		List<User> password=userserv.login_password(user.getPassword());
@@ -40,6 +42,8 @@ public class UserController {
 			model.addAttribute("password_error","Password not match");
 			return "login";
 		}
+		session.setAttribute("validuser",username);
+		session.setMaxInactiveInterval(1000);
 		model.addAttribute("name",username.getFname());
 		return "profile";
 	}
@@ -65,7 +69,8 @@ public class UserController {
 	}
 	
 	@GetMapping("/logout")
-	private String logOut() {
+	private String logOut(HttpSession session) {
+		session.invalidate();//session kill
 		return "login";
 	}
 }

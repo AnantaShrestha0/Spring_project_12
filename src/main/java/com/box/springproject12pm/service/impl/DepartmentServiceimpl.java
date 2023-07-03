@@ -11,8 +11,12 @@ import com.box.springproject12pm.service.Department_Service;
 
 @Service
 public class DepartmentServiceimpl implements Department_Service {
+	
+	
     @Autowired
 	private Department_repo department_repo;
+    
+    
 	@Override
 	public void addDepth(Department dept) {
 		// TODO Auto-generated method stub
